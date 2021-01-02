@@ -135,7 +135,7 @@ function showmsg() {
       $.subt += ', APP: 设置签到账号'
     }
     //$.msg($.name, $.subt, $.desc.join('\n'))
-    await notify.sendNotify(`${$.name} ', '${$.subt}`, `${$.desc.join} `);
+    notify.sendNotify(`${$.name} ', '${$.subt}`, `${$.desc.join} `);
 
     resolve()
   })
