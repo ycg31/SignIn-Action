@@ -85,7 +85,7 @@ function signinapp(account) {
         const errCode = _data.error_code
         if (errCode === '0' && _data.data.checkin_status === '0') account.issuc = true
         else if (errCode === '0' && _data.data.checkin_status === '1') account.isrepeat = true
-        else account.msg = errCode
+        else account.msg = "ff"
       } catch (e) {
         $.logErr(e, resp)
       } finally {
@@ -135,7 +135,7 @@ function showmsg() {
       $.subt += ', APP: 设置签到账号'
     }
     //$.msg($.name, $.subt, $.desc.join('\n'))
-    notify.sendNotify(`${$.name} ', '${$.subt}`, `${$.desc.join('\n')} `);
+    notify.sendNotify(`${$.name} , ${$.subt}`, `${$.desc.join('\n')} `);
 
     resolve()
   })
