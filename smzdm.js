@@ -83,7 +83,7 @@ function signinapp(account) {
       try {
         const _data = JSON.parse(data)
         const errCode = _data.error_code
-        account.msg = _data.error_msg
+        account.msg = _data.data
         if (errCode === '0' && _data.data.checkin_status === '0') account.issuc = true
         else if (errCode === '0' && _data.data.checkin_status === '1') account.isrepeat = true
         else account.msg = _data.error_msg
