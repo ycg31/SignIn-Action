@@ -85,7 +85,7 @@ function signinapp(account) {
         const errCode = _data.error_code
         if (errCode === '0' && _data.data.checkin_status === '0') account.issuc = true
         else if (errCode === '0' && _data.data.checkin_status === '1') account.isrepeat = true
-        else account.msg = _data.error_msg
+        else account.msg = errCode
       } catch (e) {
         $.logErr(e, resp)
       } finally {
@@ -123,7 +123,7 @@ function showmsg() {
       $.desc.push(`累计: ${$.web.data.checkin_num}次, 经验: ${$.web.data.exp}, 金币: ${$.web.data.gold}, 积分: ${$.web.data.point}`)
     }
     if (Array.isArray($.accounts) && $.accounts.length > 0) {
-      $.desc.push('点击查看详情', '')
+  //    $.desc.push('点击查看详情', '')
       let signedCnt = 0
       for (let accIdx = 0; accIdx < $.accounts.length; accIdx++) {
         const account = $.accounts[accIdx]
