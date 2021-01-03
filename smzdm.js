@@ -1,18 +1,12 @@
 const $ = new Env('什么值得买')
 const notify = $.isNode() ? require('./sendNotify') : '';
-$.CFG_tokens = 'chavy_tokens_smzdm'
 
 // 判断github action里面是否有值得买cookies
 if (process.env.SMZDM_COOKIES) {
   $.VAL_cookies = process.env.SMZDM_COOKIES
 }
-// 判断github action里面是否有值得买账号，账号秘密用逗号分开，不同账号换行
-if (process.env.SMZDM_ACCOUNTS) {
-  $.VAl_accounts = process.env.SMZDM_ACCOUNTS
-}
 
 !(async () => {
-  await signapp()
   await signweb()
   await showmsg()
 })()
@@ -38,83 +32,6 @@ function signweb() {
   })
 }
 
-async function signapp() {
-  const accounts = getAccounts()
-  for (let accIdx = 0; accIdx < accounts.length; accIdx++) {
-    const account = accounts[accIdx]
-    await loginapp(account)
-    await $.wait(account.isCached ? 0 : 3000)
-    await signinapp(account)
-    await $.wait(3000)
-  }
-  $.accounts = accounts
-}
-
-function loginapp(account) {
-  const tokens = getTokens()
-  if (tokens[account.acc]) {
-    account.isCached = true
-    account.token = tokens[account.acc]
-    return
-  }
-  return new Promise((resove) => {
-    const url = { url: 'https://api.smzdm.com/v1/user/login', headers: {} }
-    url.body = `user_login=${account.acc}&user_pass=${account.pwd}&f=win`
-    $.post(url, (err, resp, data) => {
-      try {
-        account.token = $.lodash_get(JSON.parse(data), 'data.token')
-        const tokens = getTokens()
-        tokens[account.acc] = account.token
-        $.setdata(JSON.stringify(tokens), $.CFG_tokens)
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resove()
-      }
-    })
-  })
-}
-
-function signinapp(account) {
-  return new Promise((resove) => {
-    const url = { url: 'https://api.smzdm.com/v1/user/checkin', headers: {} }
-    url.body = `f=win&token=${account.token}`
-    $.post(url, (err, resp, data) => {
-      try {
-        const _data = JSON.parse(data)
-        const errCode = _data.error_code
-        account.msg = _data
-       // if (errCode === '0' && _data.data.checkin_status === '0') account.issuc = true
-       // else if (errCode === '0' && _data.data.checkin_status === '1') account.isrepeat = true
-       // else account.msg = _data.error_msg
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resove()
-      }
-    })
-  })
-}
-
-function getAccounts() {
-  const accounts = []
-  $.VAl_accounts &&
-    $.VAl_accounts.split('\n').forEach((account) => {
-      let [acc, pwd] = account.split(',')
-      acc = acc ? acc.trim() : acc
-      pwd = pwd ? pwd.trim() : pwd
-      if (acc && pwd) {
-        accounts.push({ acc, pwd })
-      }
-    })
-  return accounts
-}
-
-function getTokens() {
-  const tokendat = $.getdata($.CFG_tokens)
-  return [undefined, null, 'null', 'undefined', ''].includes(tokendat) ? {} : JSON.parse(tokendat)
-}
-
 function showmsg() {
   return new Promise((resolve) => {
     $.subt = ''
@@ -123,21 +40,7 @@ function showmsg() {
     if ($.web.error_code === 0 && $.web.data) {
       $.desc.push(`累计: ${$.web.data.checkin_num}次, 经验: ${$.web.data.exp}, 金币: ${$.web.data.gold}, 积分: ${$.web.data.point}`)
     }
-    if (Array.isArray($.accounts) && $.accounts.length > 0) {
-  //    $.desc.push('点击查看详情', '')
-      let signedCnt = 0
-      for (let accIdx = 0; accIdx < $.accounts.length; accIdx++) {
-        const account = $.accounts[accIdx]
-        signedCnt += account.issuc || account.isrepeat ? 1 : 0
-        $.desc.push(`${account.acc}: ${account.issuc ? '成功' : account.isrepeat ? '重复' : `失败. ${account.msg}`}`)
-      }
-      $.subt += `, APP: ${signedCnt}/${$.accounts.length}`
-    } else {
-      $.subt += ', APP: 设置签到账号'
-    }
-    //$.msg($.name, $.subt, $.desc.join('\n'))
     notify.sendNotify(`${$.name} , ${$.subt}`, `${$.desc.join('\n')} `);
-
     resolve()
   })
 }
