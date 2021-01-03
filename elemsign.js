@@ -33,6 +33,7 @@ var headerscommon = {
 
 //签到结果
 var signresult = '';
+var signdate = signresult + 1
 
 //翻牌结果
 var turnstr = '翻牌结果: ';
@@ -52,7 +53,8 @@ function sign() {
     if (hisresult) {
      if (hisresult.has_signed_in_today) {
         signresult = `签到结果: 重复❗ 已连续签到${hisresult.current_day+1}天`;
-        sy.log("签到结果: 重复❗ 已连续签到"+${hisresult.current_day+1}+"天");
+        signdate = hisresult.current_day + 1
+        sy.log("签到结果: 重复❗ 已连续签到"+signdate+"天");
         turnstr=turnstr+'无';
         doNotify();
       }
@@ -94,14 +96,14 @@ function dosign() {
           if (response.status == 200) {
             signresult = `签到结果: 成功🎉 已连续签到${hisresult.current_day+1}天`
             sign_result = obj;
-            sy.log("签到结果: 成功🎉 已连续签到"+${hisresult.current_day}+"天");
+            sy.log("签到结果: 成功🎉 已连续签到"+signdate+"天");
           } else if (response.status == 400) {
             signresult = `签到结果: 重复❗ 已连续签到${hisresult.current_day}天`
-            sy.log("签到结果: 重复❗ 已连续签到"+${hisresult.current_day}+"天");
+            sy.log("签到结果: 重复❗ 已连续签到"+hisresult.current_day+"天");
           }
           else {
             signresult = `签到结果: 未知❗ 已连续签到${hisresult.current_day}天`
-            sy.log("签到结果: 失败❗ 已连续签到"+${hisresult.current_day}+"天");
+            sy.log("签到结果: 失败❗ 已连续签到"+hisresult.current_day+"天");
           }
           resolve('done');
         })
