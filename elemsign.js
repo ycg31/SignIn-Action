@@ -90,6 +90,7 @@ function dosign() {
 
         sy.post(url, (error, response, data) => {
           var obj = JSON.parse(data);
+          sy.log("签到" + response.status);
           if (response.status == 200) {
             signresult = `签到结果: 成功🎉 已连续签到${hisresult.current_day+1}天`
             sign_result = obj;
@@ -133,6 +134,7 @@ function doturnover(count,time) {
         sy.post(url, (error, response, data) => {
           var obj = JSON.parse(data);
           sy.log(count);
+          sy.log("翻牌" + response.status);
           if (response.status == 200) {
             turnstr = turnstr + `成功(${count})🎉 `
             for (var i in obj) {
@@ -178,6 +180,7 @@ function doshare() {
         url.url += userid;
         url.url += endurl;
         sy.post(url, (error, response, data) => {
+          sy.log("分享" + response.status);
           if (response.status == 200) {
 
             sy.log("分享微信成功");
