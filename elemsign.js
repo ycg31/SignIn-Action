@@ -254,7 +254,7 @@ function init() {
             return ({request})
     })()
     const msg = (title, subtitle, message) => {
-      notify.sendNotify(title,subtitle,message)
+      notify.sendNotify(title, subtitle, message)
     }
     const adapterStatus = (response) => {
         if (response) {
