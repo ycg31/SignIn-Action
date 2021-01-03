@@ -9,7 +9,7 @@ const cookieKey = 'cookie_elem'
 const UserId = 'user_id_elem'
 const sy = init()
 
-/ 判断github action里面是否有饿了么cookies
+// 判断github action里面是否有饿了么cookies
 if (process.env.cookie_elem) {
   var cookieVal = process.env.cookie_elem
   }else{

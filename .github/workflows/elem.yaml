@@ -26,7 +26,7 @@ jobs:
                   npm install
             - name: "运行【饿了么】"
               run: |
-                  node elem.js
+                  node elemsign.js
               env:
                   cookie_elem: ${{ secrets.cookie_elem || github.event.client_payload.cookie_elem }}
                   PUSH_KEY: ${{ secrets.PUSH_KEY || github.event.client_payload.PUSH_KEY }}
