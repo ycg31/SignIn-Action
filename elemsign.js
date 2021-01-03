@@ -255,8 +255,8 @@ function init() {
             const request = require('request')
             return ({request})
     })()
-    const notify = (title, subtitle, message) => {
-        log(title+subtitle+message)
+    const msg = (title, subtitle, message) => {
+      notify.sendNotify(title,subtitle,message)
     }
     const adapterStatus = (response) => {
         if (response) {
@@ -279,7 +279,7 @@ function init() {
             })
     }
     const log = (message) => console.log(message)
-    return { notify,  get, post, log }
+    return { msg,  get, post, log }
 }
 
 
