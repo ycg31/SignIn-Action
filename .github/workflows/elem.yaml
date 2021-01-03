@@ -1,14 +1,14 @@
-name: 什么值得买
+name: 饿了么
 
 on:
     workflow_dispatch:
     schedule:
-        - cron: "0 12 * * *"
-        - cron: "0 22 * * *"
+        - cron: "10 12 * * *"
+        - cron: "10 22 * * *"
     watch:
         types: [started]
     repository_dispatch:
-        types: smzdm
+        types: elem
 
 jobs:
     build:
@@ -24,12 +24,11 @@ jobs:
             - name: 安装依赖包
               run: |
                   npm install
-            - name: "运行【什么值得买】"
+            - name: "运行【饿了么】"
               run: |
-                  node smzdm.js
+                  node elem.js
               env:
-                  SMZDM_ACCOUNTS: ${{ secrets.SMZDM_ACCOUNTS || github.event.client_payload.SMZDM_ACCOUNTS }}
-                  SMZDM_COOKIES: ${{ secrets.SMZDM_COOKIES || github.event.client_payload.SMZDM_COOKIES }}
+                  cookie_elem: ${{ secrets.cookie_elem || github.event.client_payload.cookie_elem }}
                   PUSH_KEY: ${{ secrets.PUSH_KEY || github.event.client_payload.PUSH_KEY }}
                   TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN || github.event.client_payload.TG_BOT_TOKEN }}
                   TG_USER_ID: ${{ secrets.TG_USER_ID || github.event.client_payload.TG_USER_ID }}
