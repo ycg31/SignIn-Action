@@ -12,7 +12,6 @@ const sy = init()
 // 判断github action里面是否有饿了么cookies
 if (process.env.cookie_elem) {
   var cookieVal = process.env.cookie_elem;
-  sy.log("cookie：" + cookieVal);
   }else{
   notify.sendNotify('饿了么', '未设置cookie', '请检查secret里是否设置cookie_elem');
 }
@@ -53,6 +52,7 @@ function sign() {
     if (hisresult) {
      if (hisresult.has_signed_in_today) {
         signresult = `签到结果: 重复❗ 已连续签到${hisresult.current_day+1}天`;
+        sy.log("签到结果: 重复❗ 已连续签到"+${hisresult.current_day+1}+"天");
         turnstr=turnstr+'无';
         doNotify();
       }
@@ -91,17 +91,17 @@ function dosign() {
 
         sy.post(url, (error, response, data) => {
           var obj = JSON.parse(data);
-          sy.log("签到" + response.status);
           if (response.status == 200) {
             signresult = `签到结果: 成功🎉 已连续签到${hisresult.current_day+1}天`
             sign_result = obj;
-
+            sy.log("签到结果: 成功🎉 已连续签到"+${hisresult.current_day}+"天");
           } else if (response.status == 400) {
             signresult = `签到结果: 重复❗ 已连续签到${hisresult.current_day}天`
-
+            sy.log("签到结果: 重复❗ 已连续签到"+${hisresult.current_day}+"天");
           }
           else {
             signresult = `签到结果: 未知❗ 已连续签到${hisresult.current_day}天`
+            sy.log("签到结果: 失败❗ 已连续签到"+${hisresult.current_day}+"天");
           }
           resolve('done');
         })
@@ -134,20 +134,21 @@ function doturnover(count,time) {
         url.url += endurl;
         sy.post(url, (error, response, data) => {
           var obj = JSON.parse(data);
-          sy.log("第"+count+"次翻牌");
-          sy.log("翻牌" + response.status);
+          sy.log("尝试第"+count+"次翻牌");
           if (response.status == 200) {
             turnstr = turnstr + `成功(${count})🎉 `
+            sy.log("翻牌成功");
             for (var i in obj) {
               turnresult.push(obj[i]);
             }
 
           } else if (response.status == 400) {
             turnstr = turnstr + `重复(${count})❗ `
-
+            sy.log("已翻过牌");
           }
           else {
             turnstr = turnstr + `未知(${count})❗ `
+            sy.log("翻牌失败，等重试");
           }
 
 
@@ -181,7 +182,6 @@ function doshare() {
         url.url += userid;
         url.url += endurl;
         sy.post(url, (error, response, data) => {
-          sy.log("分享" + response.status);
           if (response.status == 200) {
 
             sy.log("分享微信成功");
