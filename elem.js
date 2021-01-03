@@ -76,7 +76,6 @@ function compatibility() {
     const node = (() => {
             const request = require('request')
             return ({request})
-        }
     })()
     const notify = (title, subtitle, message) => {
         log(title+subtitle+message)
