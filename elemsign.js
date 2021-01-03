@@ -54,7 +54,6 @@ function sign() {
         signresult = `签到结果: 重复❗ 已连续签到${hisresult.current_day+1}天`;
         turnstr=turnstr+'无';
         doNotify();
-        sy.done()
       }
       else {
         dosign().then((data) => {
@@ -64,7 +63,6 @@ function sign() {
                 doturnover(2,delay).then((data) => {
       
                   doNotify();
-                  sy.done()
                 })
               })
           })
