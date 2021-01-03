@@ -3,7 +3,8 @@ name: 什么值得买
 on:
     workflow_dispatch:
     schedule:
-        - cron: "0 18 * * *"
+        - cron: "0 12 * * *"
+        - cron: "0 22 * * *"
     watch:
         types: [started]
     repository_dispatch:
