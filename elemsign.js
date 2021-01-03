@@ -11,7 +11,8 @@ const sy = init()
 
 // 判断github action里面是否有饿了么cookies
 if (process.env.cookie_elem) {
-  var cookieVal = process.env.cookie_elem
+  var cookieVal = process.env.cookie_elem;
+  sy.log("cookie：" + cookieVal);
   }else{
   notify.sendNotify('饿了么', '未设置cookie', '请检查secret里是否设置cookie_elem');
 }
@@ -133,7 +134,7 @@ function doturnover(count,time) {
         url.url += endurl;
         sy.post(url, (error, response, data) => {
           var obj = JSON.parse(data);
-          sy.log(count);
+          sy.log("第"+count+"次翻牌");
           sy.log("翻牌" + response.status);
           if (response.status == 200) {
             turnstr = turnstr + `成功(${count})🎉 `
