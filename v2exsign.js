@@ -17,7 +17,7 @@ if (!process.env.V2EXCK) {
   ckstatus = 1; 
   signstatus = 0;
   //time = new Date();
-  time = moment(date). utcOffset(480).format('lll'); 
+  time = moment(). utcOffset(480).format('lll'); 
 
   //tmpHours = time.getHours();time.setHours(tmpHours + 8);
   //notice = time.toLocaleString() + "\n";
