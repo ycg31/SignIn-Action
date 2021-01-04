@@ -1,0 +1,36 @@
+name: V2EX
+
+on:
+    workflow_dispatch:
+    schedule:
+        # 每天12点20分定时运行
+        - cron: "20 4 * * *"
+        # 每天22点20分定时运行
+        - cron: "20 14 * * *"
+    watch:
+        types: [started]
+    repository_dispatch:
+        types: v2ex
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        if: github.event.repository.owner.id == github.event.sender.id
+        steps:
+            - name: 拉取代码
+              uses: actions/checkout@v2
+            - name: Use Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "12.x"
+            - name: 安装依赖包
+              run: |
+                  npm install
+            - name: "运行【V2EX】"
+              run: |
+                  node v2exsign.js
+              env:
+                  V2EXCK: ${{ secrets.V2EXCK }}
+                  PUSH_KEY: ${{ secrets.PUSH_KEY }}
+                  TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+                  TG_USER_ID: ${{ secrets.TG_USER_ID }}
