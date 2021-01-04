@@ -52,4 +52,4 @@
 
 [@chavyleung](https://github.com/chavyleung/scripts/tree/master/smzdm) - 什么值得买签到
 
-
+@[songyangzz](https://github.com/songyangzz) - 饿了么签到
