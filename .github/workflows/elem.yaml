@@ -3,9 +3,9 @@ name: 饿了么
 on:
     workflow_dispatch:
     schedule:
-        //每天12点10分定时运行
+        # 每天12点10分定时运行
         - cron: "10 4 * * *"
-        //每天22点10分定时运行
+        # 每天22点10分定时运行
         - cron: "10 14 * * *"
     watch:
         types: [started]
