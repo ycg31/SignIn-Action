@@ -38,6 +38,16 @@
 
 更多Secrets配置[点击查看](backup/secrets.md)
 
+## Cookie获取方式
+
+### V2EX
+
+1.打开v2ex网站登录成功，Google浏览器按F12进入调试模式。
+
+2.点击Network->左边条目选择www.v2ex.com->点击Headers
+
+3.下拉在Request Header栏内找到cookies：  复制全部内容
+
 ## 鸣谢
 
 [@sazs34](https://github.com/sazs34) - MyActions

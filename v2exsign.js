@@ -10,6 +10,8 @@ if (!process.env.V2EXCK) {
   const cookie = process.env.V2EXCK;
   const notify = require('./sendNotify');
   const fs = require("fs");
+  const axios = require("axios");
+
   once = null;
   ckstatus = 1; 
   signstatus = 0;
