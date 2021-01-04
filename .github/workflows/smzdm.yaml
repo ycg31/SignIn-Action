@@ -3,8 +3,10 @@ name: 什么值得买
 on:
     workflow_dispatch:
     schedule:
-        - cron: "0 12 * * *"
-        - cron: "0 22 * * *"
+        # 定时任务，在每天的12点执行任务
+        - cron: "0 4 * * *"
+       # 定时任务，在每天的22点执行任务
+        - cron: "0 14 * * *"
     watch:
         types: [started]
     repository_dispatch:
