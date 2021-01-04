@@ -15,7 +15,8 @@ if (!process.env.V2EXCK) {
   once = null;
   ckstatus = 1; 
   signstatus = 0;
-  time = new Date();
+  time = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000).toLocaleString();
+  console.log(`==================脚本执行- 北京时间(UTC+8)：${time}=====================\n`)
 
   tmpHours = time.getHours();time.setHours(tmpHours + 8);
   notice = time.toLocaleString() + "\n";
