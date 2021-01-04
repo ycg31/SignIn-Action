@@ -11,15 +11,17 @@ if (!process.env.V2EXCK) {
   const notify = require('./sendNotify');
   const fs = require("fs");
   const axios = require("axios");
+  const moment = require('moment');
 
   once = null;
   ckstatus = 1; 
   signstatus = 0;
-  time = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000).toLocaleString();
-  console.log(`==================脚本执行- 北京时间(UTC+8)：${time}=====================\n`)
+  //time = new Date();
+  time = moment(date). utcOffset(480).format('lll'); 
 
-  tmpHours = time.getHours();time.setHours(tmpHours + 8);
-  notice = time.toLocaleString() + "\n";
+  //tmpHours = time.getHours();time.setHours(tmpHours + 8);
+  //notice = time.toLocaleString() + "\n";
+  notice = time + "\n";
   const header = {
       headers: {
           Referer: "https://www.v2ex.com/mission",
