@@ -40,6 +40,7 @@ function signapp() {
     $.post(url, (error, response, data) => {
       try {
         $.signinfo.sign = JSON.parse(response.body)
+        $.log(`${$.name} 签到结果: ${$.signinfo.sign.data.status}`)
         resolve()
       } catch (e) {
         notify.sendNotify($.name, `签到结果: 失败`, `说明: ${e}`)
