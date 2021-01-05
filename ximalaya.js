@@ -165,6 +165,11 @@ function showmsg() {
 }
 
 function init() {
+  
+    const name = (title) => {
+      return title
+    }
+
     const node = (() => {
             const request = require('request')
             return ({request})
