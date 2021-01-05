@@ -3,8 +3,11 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 
 // 判断github action里面是否有值得买cookies
 if (process.env.XMLY_COOKIES) {
-  VAL_signcookie = process.env.XMLY_COOKIES
+  var VAL_signcookie = process.env.XMLY_COOKIES
+  }else{
+  notify.sendNotify('喜马拉雅', '未设置cookie', '请检查secret里是否设置XMLY_COOKIES');
 }
+
 
 $.signinfo = {}
 const data = new Date();
