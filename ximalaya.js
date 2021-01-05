@@ -1,10 +1,10 @@
-const $ = new Env('喜马拉雅')
+const $ = new init('喜马拉雅')
 const notify = $.isNode() ? require('./sendNotify') : '';
 
 // 判断github action里面是否有值得买cookies
 if (process.env.XMLY_COOKIES) {
   var VAL_signcookie = process.env.XMLY_COOKIES
-  $.log(`${VAL_signcookie}`)
+  $.log(`coocike为：${VAL_signcookie}`)
   }else{
   notify.sendNotify('喜马拉雅', '未设置cookie', '请检查secret里是否设置XMLY_COOKIES');
 }
@@ -162,6 +162,38 @@ function showmsg() {
     }
   }
   notify.sendNotify($.name, subTitle, detail)
+}
+
+function init() {
+    const node = (() => {
+            const request = require('request')
+            return ({request})
+    })()
+    const msg = (title, subtitle, message) => {
+      notify.sendNotify(title, subtitle, message)
+    }
+    const adapterStatus = (response) => {
+        if (response) {
+            if (response.status) {
+                response["statusCode"] = response.status
+            } else if (response.statusCode) {
+                response["status"] = response.statusCode
+            }
+        }
+        return response
+    }
+    const get = (options, callback) => {
+            node.request(options, (error, response, body) => {
+                callback(error, adapterStatus(response), body)
+            })
+    }
+    const post = (options, callback) => {
+            node.request.post(options, (error, response, body) => {
+                callback(error, adapterStatus(response), body)
+            })
+    }
+    const log = (message) => console.log(message)
+    return { msg,  get, post, log }
 }
 
 // prettier-ignore
