@@ -1,4 +1,4 @@
-const $ = new init('喜马拉雅')
+const $ = new init()
 const notify = require('./sendNotify');
 
 // 判断github action里面是否有值得买cookies
@@ -23,7 +23,6 @@ let time = data.getTime();
   showmsg()
 })()
   .catch((e) => $.logErr(e))
-  .finally(() => $.done())
 
 function signapp() {
   return new Promise((resolve, reject) => {
@@ -41,12 +40,12 @@ function signapp() {
     $.post(url, (error, response, data) => {
       try {
         $.signinfo.sign = JSON.parse(response.body)
-        $.log(`${$.name} 签到结果: ${$.signinfo.sign.data.status}`)
+        $.log(` 签到结果: ${$.signinfo.sign.data.status}`)
         resolve()
       } catch (e) {
-        notify.sendNotify($.name, `签到结果: 失败`, `说明: ${e}`)
-        $.log(`❌ ${$.name} signapp - 签到失败: ${e}`)
-        $.log(`❌ ${$.name} signapp - response: ${JSON.stringify(response)}`)
+        notify.sendNotify('喜马拉雅', `签到结果: 失败`, `说明: ${e}`)
+        $.log(`❌  signapp - 签到失败: ${e}`)
+        $.log(`❌  signapp - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
@@ -70,13 +69,13 @@ function browseapp() {
       'Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 iting/6.6.45 kdtunion_iting/1.0 iting(main)/6.6.45/ios_1'
     $.get(url, (error, response, data) => {
       try {
-        $.log(`❕ ${$.name} browseapp - response: ${JSON.stringify(response)}`)
+        $.log(`❕  browseapp - response: ${JSON.stringify(response)}`)
         $.signinfo.browseapp = JSON.parse(data)
         resolve()
       } catch (e) {
-        notify.sendNotify($.name, `每日浏览: 失败`, `说明: ${e}`)
-        $.log(`❌ ${$.name} browseapp - 每日浏览: ${e}`)
-        $.log(`❌ ${$.name} browseapp - response: ${JSON.stringify(response)}`)
+        notify.sendNotify('喜马拉雅', `每日浏览: 失败`, `说明: ${e}`)
+        $.log(`❌  browseapp - 每日浏览: ${e}`)
+        $.log(`❌  browseapp - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
@@ -97,12 +96,12 @@ function getinfo() {
     $.get(url, (error, response, data) => {
       try {
         $.signinfo.info = JSON.parse(data)
-        $.log(`${$.name} 签到信息: ${$.signinfo.info.isTickedToday}`)
+        $.log(` 签到信息: ${$.signinfo.info.isTickedToday}`)
         resolve()
       } catch (e) {
-        notify.sendNotify($.name, `获取签到信息: 失败`, `说明: ${e}`)
-        $.log(`❌ ${$.name} getinfo - 获取签到信息失败: ${e}`)
-        $.log(`❌ ${$.name} getinfo - response: ${JSON.stringify(response)}`)
+        notify.sendNotify('喜马拉雅', `获取签到信息: 失败`, `说明: ${e}`)
+        $.log(`❌  getinfo - 获取签到信息失败: ${e}`)
+        $.log(`❌  getinfo - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
@@ -125,9 +124,9 @@ function getacc() {
         $.signinfo.acc = JSON.parse(data)
         resolve()
       } catch (e) {
-        notify.sendNotify($.name, `获取账号信息: 失败`, `说明: ${e}`)
-        $.log(`❌ ${$.name} getacc - 获取账号信息失败: ${e}`)
-        $.log(`❌ ${$.name} getacc - response: ${JSON.stringify(response)}`)
+        notify.sendNotify('喜马拉雅', `获取账号信息: 失败`, `说明: ${e}`)
+        $.log(`❌  getacc - 获取账号信息失败: ${e}`)
+        $.log(`❌  getacc - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
@@ -161,11 +160,11 @@ function showmsg() {
       subTitle += ', 每日浏览: 失败'
     }
   }
-  notify.sendNotify($.name, subTitle, detail)
+  notify.sendNotify('喜马拉雅', subTitle, detail)
 }
 
 function init() {
-  
+
     const name = (title) => {
       return title
     }
