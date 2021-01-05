@@ -1,16 +1,14 @@
-name: V2EX
+name: 喜马拉雅
 
 on:
     workflow_dispatch:
     schedule:
-        # 每天11点20分定时运行
-        - cron: "20 3 * * *"
-        # 每天21点20分定时运行
-        - cron: "20 13 * * *"
+        # 定时任务，在每天的1点和20执行任务
+        - cron: "0 17,12 * * *"
     watch:
         types: [started]
     repository_dispatch:
-        types: v2ex
+        types: ximalaya
 
 jobs:
     build:
@@ -26,13 +24,11 @@ jobs:
             - name: 安装依赖包
               run: |
                   npm install
-                  npm install axios
-                  npm install moment
-            - name: "运行【V2EX】"
+            - name: "运行【喜马拉雅】"
               run: |
-                  node v2exsign.js
+                  node ximalaya.js
               env:
-                  V2EXCK: ${{ secrets.V2EXCK }}
+                  XMLY_COOKIES: ${{ secrets.SMZDM_COOKIES }}
                   PUSH_KEY: ${{ secrets.PUSH_KEY }}
                   TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
                   TG_USER_ID: ${{ secrets.TG_USER_ID }}

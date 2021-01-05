@@ -1,5 +1,8 @@
 /*
-参考chavyleung和NobyDa的写法
+原作者 songyangzz
+原脚本：https://github.com/songyangzz/QuantumultX/blob/master/elem/elemSign.js
+由yandogn31修改
+本脚本：https://github.com/ycg31/SignIn-Action/blob/main/elemsign.js
 */
 
 const notify = require('./sendNotify');
