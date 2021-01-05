@@ -92,6 +92,7 @@ function getinfo() {
     $.get(url, (error, response, data) => {
       try {
         $.signinfo.info = JSON.parse(data)
+        $.log(`${$.name} 签到信息: ${$.signinfo.info}`)
         resolve()
       } catch (e) {
         notify.sendNotify($.name, `获取签到信息: 失败`, `说明: ${e}`)
