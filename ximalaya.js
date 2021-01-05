@@ -3,7 +3,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 
 // 判断github action里面是否有值得买cookies
 if (process.env.XMLY_COOKIES) {
-  $.VAL_signcookie = process.env.XMLY_COOKIES
+  VAL_signcookie = process.env.XMLY_COOKIES
 }
 
 $.signinfo = {}
