@@ -7,8 +7,9 @@ if (process.env.XMLY_COOKIES) {
 }
 
 $.signinfo = {}
-let time = new Date().getTime()
-tmpHours = time.getHours();time.setHours(tmpHours + 8);
+const data = new Date();
+tmpHours = data.getHours();data.setHours(tmpHours + 8);
+let time = data.getTime();
 
 ;(exec = async () => {
   await getinfo()
@@ -49,9 +50,10 @@ function signapp() {
 
 function browseapp() {
   return new Promise((resolve, reject) => {
-    let time = new Date().getTime()
-    tmpHours = time.getHours();time.setHours(tmpHours + 8);
-    const timestamp = Math.round(time / 1000).toString()
+    let data1 = new Date();
+    let tmpHours1 = data1.getHours();data1.setHours(tmpHours1 + 8);
+    let time1 = data1.getTime();
+    const timestamp = Math.round(time1 / 1000).toString()
     const browseappurl = `https://mobile.ximalaya.com/daily-label-mobile/v1/task/checkIn/ts-${timestamp}?coinSwitch=true`
     const url = { url: browseappurl, headers: { Cookie: VAL_signcookie } }
     url.headers['Accept'] = '*/*'
