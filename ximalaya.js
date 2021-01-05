@@ -1,5 +1,5 @@
 const $ = new init('喜马拉雅')
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = require('./sendNotify');
 
 // 判断github action里面是否有值得买cookies
 if (process.env.XMLY_COOKIES) {
