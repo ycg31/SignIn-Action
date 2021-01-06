@@ -156,7 +156,7 @@ function showmsg() {
       subTitle += ', 每日浏览: 失败'
     }
   }
-  notify.sendNotify('喜马拉雅 ${subTitle}', detail, '')
+  notify.sendNotify('喜马拉雅' + subTitle, detail, '')
 }
 
 // prettier-ignore
