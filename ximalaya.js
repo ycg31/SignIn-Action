@@ -2,11 +2,11 @@ const $ = new Env('喜马拉雅')
 const notify = require('./sendNotify');
 
 // 判断github action里面是否有值得买cookies
-if (process.env.XMLY_COOKIES) {
+//if (process.env.XMLY_COOKIES) {
   $.VAL_cookies = process.env.XMLY_COOKIES
-}else{
-  notify.sendNotify('喜马拉雅', '未设置cookie', '请检查secret里是否设置XMLY_COOKIES');
-}
+//}else{
+//  notify.sendNotify('喜马拉雅', '未设置cookie', '请检查secret里是否设置XMLY_COOKIES');
+//}
 
 $.log(` Cookie: ${$.VAL_cookies}`)
 
