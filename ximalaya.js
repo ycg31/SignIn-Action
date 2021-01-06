@@ -27,8 +27,9 @@ function signapp() {
   return new Promise((resolve, reject) => {
     const url = {
       url: `https://hybrid.ximalaya.com/web-activity/signIn/action?aid=8&ts=${time}&_sonic=0&impl=com.gemd.iting&_sonic=0`,
-      headers: { Cookie: $.VAL_cookies }
+      headers: {}
     }
+    url.headers['Cookie'] = $.VAL_cookies
     url.headers['Accept'] = 'application/json, text/plain, */*'
     url.headers['Accept-Encoding'] = 'gzip, deflate, br'
     url.headers['Accept-Language'] = 'zh-cn'
@@ -58,7 +59,8 @@ function browseapp() {
     let time1 = data1.getTime();
     const timestamp = Math.round(time1 / 1000).toString()
     const browseappurl = `https://mobile.ximalaya.com/daily-label-mobile/v1/task/checkIn/ts-${timestamp}?coinSwitch=true`
-    const url = { url: browseappurl, headers: { Cookie: $.VAL_cookies } }
+    const url = { url: browseappurl, headers: {} }
+    url.headers['Cookie'] = $.VAL_cookies
     url.headers['Accept'] = '*/*'
     url.headers['Accept-Encoding'] = 'gzip, deflate'
     url.headers['Accept-Language'] = 'zh-Hans-CN;q=1, en-US;q=0.9'
@@ -83,7 +85,8 @@ function browseapp() {
 
 function getinfo() {
   return new Promise((resolve, reject) => {
-    const url = { url: `https://m.ximalaya.com/starwar/lottery/check-in/record`, headers: { Cookie: $.VAL_cookies } }
+    const url = { url: `https://m.ximalaya.com/starwar/lottery/check-in/record`, headers: {} }
+    url.headers['Cookie'] = $.VAL_cookies
     url.headers['Accept'] = `application/json, text/plain, */*`
     url.headers['Accept-Encoding'] = `gzip, deflate, br`
     url.headers['Accept-Language'] = `zh-cn`
@@ -109,7 +112,8 @@ function getinfo() {
 
 function getacc() {
   return new Promise((resolve, reject) => {
-    const url = { url: `https://m.ximalaya.com/starwar/task/listen/account`, headers: { Cookie: $.VAL_cookies } }
+    const url = { url: `https://m.ximalaya.com/starwar/task/listen/account`, headers: {} }
+    url.headers['Cookie'] = $.VAL_cookies
     url.headers['Accept'] = `application/json, text/plain, */*`
     url.headers['Accept-Encoding'] = `gzip, deflate, br`
     url.headers['Accept-Language'] = `zh-cn`
