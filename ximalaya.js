@@ -12,6 +12,7 @@ $.signinfo = {}
 const data = new Date();
 tmpHours = data.getHours();data.setHours(tmpHours + 8);
 let time = data.getTime();
+$.log(`北京时间: ${time}`)
 
 !(async () => {
   await getinfo()
