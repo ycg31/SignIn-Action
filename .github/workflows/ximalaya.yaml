@@ -28,7 +28,7 @@ jobs:
               run: |
                   node ximalaya.js
               env:
-                  XMLY_COOKIES: ${{ secrets.SMZDM_COOKIES }}
+                  XMLY_COOKIES: ${{ secrets.XMLY_COOKIES }}
                   PUSH_KEY: ${{ secrets.PUSH_KEY }}
                   TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
                   TG_USER_ID: ${{ secrets.TG_USER_ID }}
