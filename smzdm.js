@@ -36,10 +36,16 @@ function showmsg() {
   return new Promise((resolve) => {
     $.subt = ''
     $.desc = []
-    $.subt = $.web.error_code === 0 ? 'PC: 成功' : $.web.error_code === 99 ? 'PC: 未登录' : 'PC: 失败'
     if ($.web.error_code === 0 && $.web.data) {
-      $.desc.push(`累计: ${$.web.data.checkin_num}次, 经验: ${$.web.data.exp}, 金币: ${$.web.data.gold}, 积分: ${$.web.data.point}`)
+//      var reg = /[<>]/; 
+//      let dataslogan = $.web.data.slogan.split(reg);
+//      let todypoint = dataslogan[4];
+      $.subt = $.web.data.add_point === 0 ? '签到重复' : '签到成功'
+      $.desc.push(`累计: ${$.web.data.checkin_num}次, 经验: ${$.web.data.exp}, 金币: ${$.web.data.gold}, 积分: ${$.web.data.point}\n 连续签到: ${$.web.data.continue_checkin_days}天`)
+    }else{
+      $.subt = $.web.error_code === 99 ? 'cookie过期' : '签到失败'
     }
+
     notify.sendNotify(`${$.name} , ${$.subt}`, `${$.desc.join('\n')} `);
     resolve()
   })
