@@ -93,7 +93,6 @@ function getinfo() {
     $.get(url, (error, response, data) => {
       try {
         $.signinfo.info = JSON.parse(data)
-        $.log(` 签到信息: ${$.signinfo.info.needLogin}`)
         resolve()
       } catch (e) {
         notify.sendNotify('喜马拉雅', `获取签到信息: 失败`, `说明: ${e}`)
