@@ -38,7 +38,6 @@ function signapp() {
     $.post(url, (error, response, data) => {
       try {
         $.signinfo.sign = JSON.parse(response.body)
-        $.log(` 签到结果: ${$.signinfo.sign.data.status}`)
         resolve()
       } catch (e) {
         notify.sendNotify('喜马拉雅', `签到结果: 失败`, `说明: ${e}`)
@@ -158,7 +157,7 @@ function showmsg() {
       subTitle += ', 每日浏览: 失败'
     }
   }
-  notify.sendNotify('喜马拉雅', subTitle, detail)
+  notify.sendNotify('喜马拉雅 ${subTitle}', detail, '')
 }
 
 // prettier-ignore
