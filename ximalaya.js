@@ -2,13 +2,12 @@ const $ = new Env('喜马拉雅')
 const notify = require('./sendNotify');
 
 // 判断github action里面是否有值得买cookies
-//if (process.env.XMLY_COOKIES) {
-//  $.VAL_cookies = process.env.XMLY_COOKIES
-//}else{
-//  notify.sendNotify('喜马拉雅', '未设置cookie', '请检查secret里是否设置XMLY_COOKIES');
-//}
+if (process.env.XMLY_COOKIES) {
+  $.VAL_cookies = process.env.XMLY_COOKIES
+else{
+  notify.sendNotify('喜马拉雅', '未设置cookie', '请检查secret里是否设置XMLY_COOKIES');
+}
 
-$.VAL_cookies = 'domain=.ximalaya.com; path=/; channel=ios-b1; 1&_device=iPhone&6C255FEF-E830-4743-B22D-24C918785163&6.7.18; impl=com.gemd.iting; NSUP=42CE89A5%2C41BD9858%2C1609339444412; XUM=6C255FEF-E830-4743-B22D-24C918785163; c-oper=%E7%94%B5%E4%BF%A1; net-mode=WIFI; res=1170%2C2532; 1&_token=87222992&11780430340C099A2D2F246797A0DD2F128BD0EEC3307B4C14BAAB43F7D37BE374A8B53A3E3B98M2F02496A6D32DB1_; idfa=6C255FEF-E830-4743-B22D-24C918785163; x_xmly_ts=1609339476702; x_xmly_resource=xm_source%3AmySpace%26xm_medium%3AmySpace; x_xmly_tid=1349710586; device_model=iPhone13,2; XD=r/zh9a15DXw/pQjryQNDotc0OD2wEkE+sTegDlP+YRM9Jv9fgGaBine598eeGlMnTPUIs3VQqaKExGaZtjoi9Q==; fp=007317v44e2022422364v15b2m0002k022211152; freeFlowType=0; minorProtectionStatus=0'
 $.log(` Cookie: ${$.VAL_cookies}`)
 
 $.signinfo = {}
