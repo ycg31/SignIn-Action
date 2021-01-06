@@ -12,10 +12,10 @@ mod by ycg31
 
 // 判断github action里面是否有饿了么cookies
 if (!process.env.V2EXCK) {
-  notify.sendNotify('V2EX', '未设置cookie', '请检查secret里是否设置V2EXCK'); 
-  }else{
-  const cookie = process.env.V2EXCK;
+  notify.sendNotify('V2EX', '未设置cookie', '请检查secret里是否设置V2EXCK');  
+  process.exitCode = 1; 
 }
+const cookie = process.env.V2EXCK;
 const notify = require('./sendNotify');
 const fs = require("fs");
 const axios = require("axios");
