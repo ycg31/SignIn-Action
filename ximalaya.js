@@ -2,18 +2,19 @@ const $ = new Env('喜马拉雅')
 const notify = require('./sendNotify');
 
 // 判断github action里面是否有值得买cookies
-if (!process.env.XMLY_COOKIES) {
+if (process.env.XMLY_COOKIES) {
+  $.VAL_cookies = process.env.XMLY_COOKIES
+}else{
   notify.sendNotify('喜马拉雅', '未设置cookie', '请检查secret里是否设置XMLY_COOKIES');
 }
 
 
 $.signinfo = {}
-const VAL_signcookie = process.env.XMLY_COOKIES
 const data = new Date();
 tmpHours = data.getHours();data.setHours(tmpHours + 8);
 let time = data.getTime();
 
-;(exec = async () => {
+!(async () => {
   await getinfo()
   if ($.signinfo.info.isTickedToday == 0) await signapp()
   // await browseapp()
@@ -26,7 +27,7 @@ function signapp() {
   return new Promise((resolve, reject) => {
     const url = {
       url: `https://hybrid.ximalaya.com/web-activity/signIn/action?aid=8&ts=${time}&_sonic=0&impl=com.gemd.iting&_sonic=0`,
-      headers: { Cookie: VAL_signcookie }
+      headers: { Cookie: $.VAL_cookies }
     }
     url.headers['Accept'] = 'application/json, text/plain, */*'
     url.headers['Accept-Encoding'] = 'gzip, deflate, br'
@@ -57,7 +58,7 @@ function browseapp() {
     let time1 = data1.getTime();
     const timestamp = Math.round(time1 / 1000).toString()
     const browseappurl = `https://mobile.ximalaya.com/daily-label-mobile/v1/task/checkIn/ts-${timestamp}?coinSwitch=true`
-    const url = { url: browseappurl, headers: { Cookie: VAL_signcookie } }
+    const url = { url: browseappurl, headers: { Cookie: $.VAL_cookies } }
     url.headers['Accept'] = '*/*'
     url.headers['Accept-Encoding'] = 'gzip, deflate'
     url.headers['Accept-Language'] = 'zh-Hans-CN;q=1, en-US;q=0.9'
@@ -82,7 +83,7 @@ function browseapp() {
 
 function getinfo() {
   return new Promise((resolve, reject) => {
-    const url = { url: `https://m.ximalaya.com/starwar/lottery/check-in/record`, headers: { Cookie: VAL_signcookie } }
+    const url = { url: `https://m.ximalaya.com/starwar/lottery/check-in/record`, headers: { Cookie: $.VAL_cookies } }
     url.headers['Accept'] = `application/json, text/plain, */*`
     url.headers['Accept-Encoding'] = `gzip, deflate, br`
     url.headers['Accept-Language'] = `zh-cn`
@@ -108,7 +109,7 @@ function getinfo() {
 
 function getacc() {
   return new Promise((resolve, reject) => {
-    const url = { url: `https://m.ximalaya.com/starwar/task/listen/account`, headers: { Cookie: VAL_signcookie } }
+    const url = { url: `https://m.ximalaya.com/starwar/task/listen/account`, headers: { Cookie: $.VAL_cookies } }
     url.headers['Accept'] = `application/json, text/plain, */*`
     url.headers['Accept-Encoding'] = `gzip, deflate, br`
     url.headers['Accept-Language'] = `zh-cn`
