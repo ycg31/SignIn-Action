@@ -31,7 +31,7 @@ async function checkUpdate() {
         let {description, publisher} = await fetchGameInfo(url);
         notify.sendNotify(
             `🎮 [Epic 限免]  ${name} ⏰ 发布时间: ${formatTime(time)}`,           
-            `💡 游戏简介:\n${description}\n链接地址：${notificationURL.open-url}`,
+            `💡 游戏简介:\n${description}\n链接地址：${url}`,
             ``,
         );
     });
