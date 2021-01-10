@@ -11,7 +11,7 @@
 const $ = API("epic");
 const notify = require('./sendNotify');
 
-checkUpdate().then(() => $done());
+checkUpdate().then();
 
 async function checkUpdate() {
     const html = await $.http.get({
