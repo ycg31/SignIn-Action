@@ -1,0 +1,33 @@
+name: 每周Epic游戏限免提醒
+
+on:
+    workflow_dispatch:
+    schedule:
+        # 定时任务，在每天的12点和22点零5分执行任务
+        - cron: "5 4,14 * * *"
+    watch:
+        types: [started]
+    repository_dispatch:
+        types: epic
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        if: github.event.repository.owner.id == github.event.sender.id
+        steps:
+            - name: 拉取代码
+              uses: actions/checkout@v2
+            - name: Use Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "12.x"
+            - name: 安装依赖包
+              run: |
+                  npm install
+            - name: "运行【Epic游戏限免提醒】"
+              run: |
+                  node epic.js
+              env:
+                  PUSH_KEY: ${{ secrets.PUSH_KEY || github.event.client_payload.PUSH_KEY }}
+                  TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN || github.event.client_payload.TG_BOT_TOKEN }}
+                  TG_USER_ID: ${{ secrets.TG_USER_ID || github.event.client_payload.TG_USER_ID }}
