@@ -30,7 +30,7 @@ async function checkUpdate() {
         let time = item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)[1];
         let {description, publisher} = await fetchGameInfo(url);
         notify.sendNotify(
-            `🎮 [Epic 限免]  ${name} ⏰ 发布时间: ${formatTime(time)}`,           
+            `🎮 [Epic 限免]  ${name} \n⏰ 发布时间: ${formatTime(time)}`,           
             `💡 游戏简介:\n${description}\n链接地址：${url}`,
             ``,
         );

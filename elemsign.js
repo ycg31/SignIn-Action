@@ -36,6 +36,7 @@ var headerscommon = {
 
 //签到结果
 var signresult = '';
+var title = '饿了么签到';
 var signdate = signresult + 1
 
 //翻牌结果
@@ -56,6 +57,7 @@ function sign() {
     if (hisresult) {
      if (hisresult.has_signed_in_today) {
         signresult = `签到结果: 重复❗ 已连续签到${hisresult.current_day+1}天`;
+        title = '饿了么签到重复';
         signdate = hisresult.current_day + 1
         sy.log("签到结果: 重复❗ 已连续签到"+signdate+"天");
         turnstr=turnstr+'无';
@@ -97,16 +99,19 @@ function dosign() {
         sy.post(url, (error, response, data) => {
           var obj = JSON.parse(data);
           if (response.status == 200) {
-            signresult = `签到结果: 成功🎉 已连续签到${hisresult.current_day+1}天`
+            signresult = `已连续签到${hisresult.current_day+1}天`
+            title = '饿了么签到成功🎉';
             sign_result = obj;
             sy.log("签到结果: 成功🎉 已连续签到"+signdate+"天");
           } else if (response.status == 400) {
-            signresult = `签到结果: 重复❗ 已连续签到${hisresult.current_day}天`
+            signresult = `已连续签到${hisresult.current_day}天`
+            title = '饿了么签到结果重复❗ ';
             sy.log("签到结果: 重复❗ 已连续签到"+hisresult.current_day+"天");
           }
           else {
-            signresult = `签到结果: 未知❗ 已连续签到${hisresult.current_day}天`
-            sy.log("签到结果: 失败❗ 已连续签到"+hisresult.current_day+"天");
+            signresult = `已连续签到${hisresult.current_day}天`
+            title = '饿了么签到结果失败❌';
+            sy.log("签到结果: 失败❌已连续签到"+hisresult.current_day+"天");
           }
           resolve('done');
         })
@@ -251,7 +256,7 @@ function doNotify() {
   
   ret = ret + '签到3天得3元🧧，7天抽10-200元🧧';
   
-  sy.msg('饿了么', ret, '');
+  sy.msg(title, ret, '');
 }
 
 
