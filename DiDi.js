@@ -38,7 +38,7 @@ const notify = require('./sendNotify');
 
 // 判断github action里面是否有值得买cookies
 if (!process.env.didi_token) {
-  notify.sendNotify('喜马拉雅', '未设置cookie', '请检查secret里是否设置XMLY_COOKIES');
+  notify.sendNotify('🚕滴滴出行', '未设置cookie', '请检查secret里是否设置didi_token');
 }
 const API_HOST = 'https://bosp-api.xiaojukeji.com/';
 const REWARD_API_HOST = 'https://rewards.xiaojukeji.com/loyalty_credit/bonus/';
