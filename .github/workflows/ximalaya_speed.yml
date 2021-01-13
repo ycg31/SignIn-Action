@@ -6,6 +6,8 @@ on:
     - cron: "5,35 * * * *"
   watch:
     types: [started]
+  repository_dispatch:
+    types: ximalaya_speed
 jobs:
   build:
     runs-on: ubuntu-latest
