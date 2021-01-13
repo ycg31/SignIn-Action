@@ -222,7 +222,7 @@ function lotteryDraw(index) {
 
 function showMsg() {
   return new Promise(resolve => {
-    notify.sendNotify($.name, '', $.result.join('\n'));
+    notify.sendNotify($.name, $.result.join('\n'), '');
     resolve();
   });
 }
