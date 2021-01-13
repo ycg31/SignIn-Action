@@ -1058,7 +1058,7 @@ def run():
                 send(title=title, content=f"请先手动填写【账号{k+1}】支付宝账号提现一次")
         print("###"*20)
         print("\n"*4)
-
+    print(int(_notify_time.split()[0]),int(_notify_time.split()[1]))
     if int(_notify_time.split()[0]) == notify_time and int(_notify_time.split()[1]) < 5:
     # if 1:
         message = ''
