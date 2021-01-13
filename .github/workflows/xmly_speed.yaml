@@ -2,9 +2,9 @@ name: 喜马拉雅极速版
 
 on:
     workflow_dispatch:
-    schedule:
+#    schedule:
         # 定时任务，在每小时的第2分钟和第32分钟执行任务
-        - cron: "2,32 * * * *"
+#        - cron: "2,32 * * * *"
     watch:
         types: [started]
     repository_dispatch:
