@@ -56,8 +56,8 @@ function sign() {
   dosignhis().then((data) => {
     if (hisresult) {
      if (hisresult.has_signed_in_today) {
-        signresult = `签到结果: 重复❗ 已连续签到${hisresult.current_day+1}天`;
-        title = '饿了么签到重复';
+        signresult = `已连续签到${hisresult.current_day+1}天`;
+        title = '饿了么-签到重复❗';
         signdate = hisresult.current_day + 1
         sy.log("签到结果: 重复❗ 已连续签到"+signdate+"天");
         turnstr=turnstr+'无';
@@ -100,17 +100,17 @@ function dosign() {
           var obj = JSON.parse(data);
           if (response.status == 200) {
             signresult = `已连续签到${hisresult.current_day+1}天`
-            title = '饿了么签到成功🎉';
+            title = '饿了么-签到成功🎉';
             sign_result = obj;
             sy.log("签到结果: 成功🎉 已连续签到"+signdate+"天");
           } else if (response.status == 400) {
             signresult = `已连续签到${hisresult.current_day}天`
-            title = '饿了么签到结果重复❗ ';
+            title = '饿了么-签到重复❗ ';
             sy.log("签到结果: 重复❗ 已连续签到"+hisresult.current_day+"天");
           }
           else {
             signresult = `已连续签到${hisresult.current_day}天`
-            title = '饿了么签到结果失败❌';
+            title = '饿了么-签到失败❌';
             sy.log("签到结果: 失败❌已连续签到"+hisresult.current_day+"天");
           }
           resolve('done');

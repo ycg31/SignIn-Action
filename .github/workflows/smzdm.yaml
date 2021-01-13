@@ -33,5 +33,7 @@ jobs:
                   SMZDM_ACCOUNTS: ${{ secrets.SMZDM_ACCOUNTS || github.event.client_payload.SMZDM_ACCOUNTS }}
                   SMZDM_COOKIES: ${{ secrets.SMZDM_COOKIES || github.event.client_payload.SMZDM_COOKIES }}
                   PUSH_KEY: ${{ secrets.PUSH_KEY || github.event.client_payload.PUSH_KEY }}
+                  BARK_PUSH: ${{ secrets.BARK_PUSH || github.event.client_payload.BARK_PUSH }}
+                  BARK_SOUND: ${{ secrets.BARK_SOUND || github.event.client_payload.BARK_SOUND }}
                   TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN || github.event.client_payload.TG_BOT_TOKEN }}
                   TG_USER_ID: ${{ secrets.TG_USER_ID || github.event.client_payload.TG_USER_ID }}
