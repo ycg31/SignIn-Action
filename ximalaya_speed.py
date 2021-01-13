@@ -2,8 +2,8 @@
 Author: whyour
 Github: https://github.com/whyour
 Date: 2020-11-19 23:25:22
-LastEditors: whyour
-LastEditTime: 2020-12-15 20:41:19
+LastEditors: ycg31
+LastEditTime: 2021-01-13 13:06:19
 '''
 import json
 import rsa
@@ -1058,7 +1058,7 @@ def run():
                 send(title=title, content=f"请先手动填写【账号{k+1}】支付宝账号提现一次")
         print("###"*20)
         print("\n"*4)
-    print(int(_notify_time.split()[0]),int(_notify_time.split()[1]))
+    print("当前时间：{int(_notify_time.split()[0])}点{int(_notify_time.split()[1])}分")
     if int(_notify_time.split()[0]) == notify_time and int(_notify_time.split()[1]) < 5:
     # if 1:
         message = ''
