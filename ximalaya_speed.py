@@ -2,7 +2,7 @@
 Author: whyour
 Github: https://github.com/whyour
 Date: 2020-11-19 23:25:22
-LastEditors: ycg31
+LastEditors: yandong31
 LastEditTime: 2021-01-13 13:06:19
 '''
 import json
@@ -1058,7 +1058,7 @@ def run():
                 send(title=title, content=f"请先手动填写【账号{k+1}】支付宝账号提现一次")
         print("###"*20)
         print("\n"*4)
-    print("当前时间：{int(_notify_time.split()[0])}点{int(_notify_time.split()[1])}分")
+    print(f"当前时间：{int(_notify_time.split()[0])}点{int(_notify_time.split()[1])}分")
     # 如果当前时间的小时数=19且分钟数在10以内，发送通知
     if int(_notify_time.split()[0]) == notify_time and int(_notify_time.split()[1]) < 10:
     # if 1:
