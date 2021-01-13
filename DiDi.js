@@ -34,12 +34,18 @@
  **/
 
 const $ = new Env('🚕滴滴出行');
+const notify = require('./sendNotify');
+
+// 判断github action里面是否有值得买cookies
+if (!process.env.didi_token) {
+  notify.sendNotify('喜马拉雅', '未设置cookie', '请检查secret里是否设置XMLY_COOKIES');
+}
 const API_HOST = 'https://bosp-api.xiaojukeji.com/';
 const REWARD_API_HOST = 'https://rewards.xiaojukeji.com/loyalty_credit/bonus/';
-$.showLog = $.getdata('didi_showLog') ? $.getdata('didi_showLog') === 'true' : false;
+$.showLog = true  //  defulse false
 $.didiLottery = $.getdata('didi_lottery') ? $.getdata('didi_lottery') === 'true' : false;
-$.token = $.getdata('didi_token') || '';
-$.cityId = $.getdata('didi_city_id') || '';
+$.token =  process.env.didi_token ? process.env.didi_token : $.getdata('didi_token');
+$.cityId = '306' || $.getdata('didi_city_id');
 $.lid = $.getdata('didi_lid');
 $.clientId = 1;
 $.result = [];
@@ -56,7 +62,7 @@ $.result = [];
 
 function getCookies() {
   if (!$.token || !$.cityId) {
-    $.msg($.name, '【提示】请先获取滴滴Token');
+    notify.sendNotify($.name, '【提示】请先获取滴滴Token');
     return false;
   }
   return true;
@@ -216,7 +222,7 @@ function lotteryDraw(index) {
 
 function showMsg() {
   return new Promise(resolve => {
-    $.msg($.name, '', $.result.join('\n'));
+    notify.sendNotify($.name, '', $.result.join('\n'));
     resolve();
   });
 }
