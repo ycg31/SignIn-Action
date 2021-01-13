@@ -1,6 +1,7 @@
 name: 喜马拉雅(极速版)
 
 on:
+  workflow_dispatch:
   schedule:
     # 定时任务，在每小时的第5分钟和第35分钟执行任务
     - cron: "5,35 * * * *"
