@@ -11,6 +11,7 @@ on:
     types: ximalaya_speed
 jobs:
   build:
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
